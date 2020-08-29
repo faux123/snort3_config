@@ -14,7 +14,6 @@
 -- 6. configure detection
 -- 7. configure filters
 -- 8. configure outputs
--- 9. configure tweaks
 
 ---------------------------------------------------------------------------
 -- 1. configure environment
@@ -28,12 +27,6 @@
 -- then:
 -- export LUA_PATH=$DIR/include/snort/lua/?.lua\;\;
 -- export SNORT_LUA_PATH=$DIR/etc/snort
-
-lua_path = os.getenv('LUA_PATH')
-if ( not lua_path ) then
---    package.path = '/opt/include/snort/lua/?.lua;?;'
-    package.path = '/opt/share/lua/?.lua;?;'
-end
 
 -- this depends on LUA_PATH
 -- used to load this conf into Snort
@@ -62,6 +55,9 @@ EXTERNAL_NET = 'any'
 dofile(conf_dir .. '/snort_defaults.lua')
 dofile(conf_dir .. '/file_magic.lua')
 
+--include 'snort_defaults.lua'
+--include 'file_magic.lua'
+
 ---------------------------------------------------------------------------
 -- 3. configure inspection
 ---------------------------------------------------------------------------
@@ -87,7 +83,6 @@ back_orifice = { }
 dnp3 = { }
 dns = { }
 http_inspect = { }
-http2_inspect = { }
 imap = { }
 modbus = { }
 normalizer = { }
@@ -122,7 +117,6 @@ appid =
 {
     -- appid requires this to use appids in rules
     app_detector_dir = '/opt/lib/'
-    --log_stats = true,
 }
 
 --[[
@@ -137,7 +131,6 @@ reputation =
 ---------------------------------------------------------------------------
 -- 4. configure bindings
 ---------------------------------------------------------------------------
-
 
 wizard = default_wizard
 
@@ -163,7 +156,6 @@ binder =
     { when = { service = 'gtp' },              use = { type = 'gtp_inspect' } },
     { when = { service = 'imap' },             use = { type = 'imap' } },
     { when = { service = 'http' },             use = { type = 'http_inspect' } },
-    { when = { service = 'http2' },            use = { type = 'http2_inspect' } },
     { when = { service = 'modbus' },           use = { type = 'modbus' } },
     { when = { service = 'pop3' },             use = { type = 'pop' } },
     { when = { service = 'ssh' },              use = { type = 'ssh' } },
@@ -201,16 +193,85 @@ classifications = default_classifications
 ips =
 {
     -- use this to enable decoder and inspector alerts
-    enable_builtin_rules = true,
+    --enable_builtin_rules = true,
 
     -- use include for rules files; be sure to set your path
     -- note that rules files can include other rules files
-    --include = 'snort3-community.rules',
---    include = '/mnt/sda1/downloads/rules/emerging-current_events.rules',
---    include = '/mnt/sda1/downloads/rules/emerging-malware.rules',
---    include = '/mnt/sda1/downloads/rules/emerging-mobile_malware.rules',
---    include = '/mnt/sda1/downloads/rules/emerging-web_server.rules',
---    include = '/mnt/sda1/downloads/rules/emerging-web_client.rules',
+    --include = 'snort3_community.rules'
+
+    -- The following include syntax is only valid for BUILD_243 (13-FEB-2018) and later
+    -- RULE_PATH is typically set in snort_defaults.lua
+    rules = [[
+
+        include $RULE_PATH/snort3-app-detect.rules
+        include $RULE_PATH/snort3-browser-chrome.rules
+        include $RULE_PATH/snort3-browser-firefox.rules
+        include $RULE_PATH/snort3-browser-ie.rules
+        include $RULE_PATH/snort3-browser-other.rules
+        include $RULE_PATH/snort3-browser-plugins.rules
+        include $RULE_PATH/snort3-browser-webkit.rules
+        include $RULE_PATH/snort3-content-replace.rules
+        include $RULE_PATH/snort3-exploit-kit.rules
+        include $RULE_PATH/snort3-file-executable.rules
+        include $RULE_PATH/snort3-file-flash.rules
+        include $RULE_PATH/snort3-file-identify.rules
+        include $RULE_PATH/snort3-file-image.rules
+        include $RULE_PATH/snort3-file-java.rules
+        include $RULE_PATH/snort3-file-multimedia.rules
+        include $RULE_PATH/snort3-file-office.rules
+        include $RULE_PATH/snort3-file-other.rules
+        include $RULE_PATH/snort3-file-pdf.rules
+        include $RULE_PATH/snort3-indicator-compromise.rules
+        include $RULE_PATH/snort3-indicator-obfuscation.rules
+        include $RULE_PATH/snort3-indicator-scan.rules
+        include $RULE_PATH/snort3-indicator-shellcode.rules
+        include $RULE_PATH/snort3-malware-backdoor.rules
+        include $RULE_PATH/snort3-malware-cnc.rules
+        include $RULE_PATH/snort3-malware-other.rules
+        include $RULE_PATH/snort3-malware-tools.rules
+        include $RULE_PATH/snort3-netbios.rules
+        include $RULE_PATH/snort3-os-linux.rules
+        include $RULE_PATH/snort3-os-mobile.rules
+        include $RULE_PATH/snort3-os-other.rules
+        include $RULE_PATH/snort3-os-solaris.rules
+        include $RULE_PATH/snort3-os-windows.rules
+        include $RULE_PATH/snort3-policy-multimedia.rules
+        include $RULE_PATH/snort3-policy-other.rules
+        include $RULE_PATH/snort3-policy-social.rules
+        include $RULE_PATH/snort3-policy-spam.rules
+        include $RULE_PATH/snort3-protocol-dns.rules
+        include $RULE_PATH/snort3-protocol-finger.rules
+        include $RULE_PATH/snort3-protocol-ftp.rules
+        include $RULE_PATH/snort3-protocol-icmp.rules
+        include $RULE_PATH/snort3-protocol-imap.rules
+        include $RULE_PATH/snort3-protocol-nntp.rules
+        include $RULE_PATH/snort3-protocol-other.rules
+        include $RULE_PATH/snort3-protocol-pop.rules
+        include $RULE_PATH/snort3-protocol-rpc.rules
+        include $RULE_PATH/snort3-protocol-scada.rules
+        include $RULE_PATH/snort3-protocol-services.rules
+        include $RULE_PATH/snort3-protocol-snmp.rules
+        include $RULE_PATH/snort3-protocol-telnet.rules
+        include $RULE_PATH/snort3-protocol-tftp.rules
+        include $RULE_PATH/snort3-protocol-voip.rules
+        include $RULE_PATH/snort3-pua-adware.rules
+        include $RULE_PATH/snort3-pua-other.rules
+        include $RULE_PATH/snort3-pua-p2p.rules
+        include $RULE_PATH/snort3-pua-toolbars.rules
+        include $RULE_PATH/snort3-server-apache.rules
+        include $RULE_PATH/snort3-server-iis.rules
+        include $RULE_PATH/snort3-server-mail.rules
+        include $RULE_PATH/snort3-server-mssql.rules
+        include $RULE_PATH/snort3-server-mysql.rules
+        include $RULE_PATH/snort3-server-oracle.rules
+        include $RULE_PATH/snort3-server-other.rules
+        include $RULE_PATH/snort3-server-samba.rules
+        include $RULE_PATH/snort3-server-webapp.rules
+        include $RULE_PATH/snort3-sql.rules
+        include $RULE_PATH/snort3-x11.rules
+
+    ]]
+
 }
 
 -- use these to configure additional rule actions
@@ -239,6 +300,7 @@ suppress =
 --[[
 event_filter =
 {
+    -- reduce the number of events logged for some rules
     { gid = 1, sid = 1, type = 'limit', track = 'by_src', count = 2, seconds = 10 },
     { gid = 1, sid = 2, type = 'both',  track = 'by_dst', count = 5, seconds = 60 },
 }
@@ -264,19 +326,14 @@ rate_filter =
 -- event logging
 -- you can enable with defaults from the command line with -A <alert_type>
 -- uncomment below to set non-default configs
---alert_csv =
---{
---    file = true,
---}
+--alert_csv = { }
 alert_fast =
 {
     file = true,
 }
 --alert_full = { }
 --alert_sfsocket = { }
---alert_syslog =
---{
---}
+--alert_syslog = { }
 --unified2 = { }
 
 -- packet logging
@@ -288,12 +345,4 @@ alert_fast =
 -- additional logs
 --packet_capture = { }
 --file_log = { }
-
----------------------------------------------------------------------------
--- 9. configure tweaks
----------------------------------------------------------------------------
-
-if ( tweaks ~= nil ) then
-    dofile(conf_dir .. '/' .. tweaks .. '.lua')
-end
 

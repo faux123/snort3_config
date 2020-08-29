@@ -22,7 +22,7 @@
 ---------------------------------------------------------------------------
 -- Path to your rules files (this can be a relative path)
 
-RULE_PATH = '../rules'
+RULE_PATH = '/mnt/sda1/downloads/rules'
 BUILTIN_RULE_PATH = '../builtin_rules'
 PLUGIN_RULE_PATH = '../so_rules'
 
@@ -59,21 +59,6 @@ SSH_SERVERS = HOME_NET
 TELNET_SERVERS = HOME_NET
 
 -- other variables, these should not be modified
-AIM_SERVERS =
-[[
-64.12.24.0/23
-64.12.28.0/23
-64.12.161.0/24
-64.12.163.0/24
-64.12.200.0/24
-205.188.3.0/24
-205.188.5.0/24
-205.188.7.0/24
-205.188.9.0/24
-205.188.153.0/24
-205.188.179.0/24
-205.188.248.0/24
-]]
 
 ---------------------------------------------------------------------------
 -- default ports - used in Talos rules
@@ -87,7 +72,7 @@ HTTP_PORTS =
 [[
     80 81 311 383 591 593 901 1220 1414 1741 1830 2301 2381 2809 3037 3128
     3702 4343 4848 5250 6988 7000 7001 7144 7145 7510 7777 7779 8000 8008
-    8014 8028 8080 8081 8082 8083
+    8014 8028 8080 8081 8082 8083 8084
     8085 8088 8090 8118 8123 8180 8181 8243 8280 8300 8800
     8888 8899 9000 9060 9080 9090 9091 9443 9999 11371 34443 34444 41080
     50002 55555 
@@ -193,13 +178,12 @@ ftp_command_specs =
     { command = 'SIZE', length = 512 },
 
     { command = 'ALLO', length = 200, format = '< int [ char R int ] >' },
-    { command = 'EPRT', length = 400, format = '< extd_host_port >' },
+    { command = 'PORT', length = 400, format = '< host_port >' },
+
     { command = 'EPSV', format = '< [ { char 12 | char A char L char L } ] >' },
-    { command = 'LPRT', length = 400, format = '< long_host_port >' },
     { command = 'MACB', format = '< string >' },
     { command = 'MDTM', format = '< [ date nnnnnnnnnnnnnn[.n[n[n]]] ] string >' },
     { command = 'MODE', format = '< char ASBCZ >' },
-    { command = 'PORT', length = 400, format = '< host_port >' },
     { command = 'PROT', format = '< char CSEP >' },
     { command = 'STRU', format = '< char FRPO [ string ] >' },
     { command = 'TYPE', 
@@ -326,15 +310,12 @@ default_wizard =
 
         { service = 'dce_http_proxy', proto = 'tcp', client_first = true,
           to_server = { 'RPC_CONNECT' } },
-
+ 
     },
     hexes =
     {
         { service = 'dnp3', proto = 'tcp', client_first = true, 
           to_server = { '|05 64|' }, to_client = { '|05 64|' } },
-
-        { service = 'http2', proto = 'tcp', client_first = true,
-          to_server = { '|50 52 49 20 2a 20 48 54 54 50 2f 32 2e 30 0d 0a 0d 0a 53 4d 0d 0a 0d 0a|' } },
 --[[
         { service = 'modbus', proto = 'tcp', client_first = true,
           to_server = { '??|0 0|' } },
