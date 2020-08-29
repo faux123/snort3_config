@@ -116,7 +116,8 @@ file_id = { file_rules = file_magic }
 appid =
 {
     -- appid requires this to use appids in rules
-    app_detector_dir = '/opt/lib/'
+    app_detector_dir = '/opt/lib/',
+    log_stats = true,
 }
 
 --[[
@@ -213,7 +214,6 @@ ips =
         include $RULE_PATH/snort3-content-replace.rules
         include $RULE_PATH/snort3-exploit-kit.rules
         include $RULE_PATH/snort3-file-executable.rules
-        include $RULE_PATH/snort3-file-flash.rules
         include $RULE_PATH/snort3-file-identify.rules
         include $RULE_PATH/snort3-file-image.rules
         include $RULE_PATH/snort3-file-java.rules
@@ -229,49 +229,50 @@ ips =
         include $RULE_PATH/snort3-malware-cnc.rules
         include $RULE_PATH/snort3-malware-other.rules
         include $RULE_PATH/snort3-malware-tools.rules
-        include $RULE_PATH/snort3-netbios.rules
         include $RULE_PATH/snort3-os-linux.rules
         include $RULE_PATH/snort3-os-mobile.rules
         include $RULE_PATH/snort3-os-other.rules
-        include $RULE_PATH/snort3-os-solaris.rules
         include $RULE_PATH/snort3-os-windows.rules
         include $RULE_PATH/snort3-policy-multimedia.rules
         include $RULE_PATH/snort3-policy-other.rules
         include $RULE_PATH/snort3-policy-social.rules
         include $RULE_PATH/snort3-policy-spam.rules
-        include $RULE_PATH/snort3-protocol-dns.rules
-        include $RULE_PATH/snort3-protocol-finger.rules
-        include $RULE_PATH/snort3-protocol-ftp.rules
-        include $RULE_PATH/snort3-protocol-icmp.rules
         include $RULE_PATH/snort3-protocol-imap.rules
-        include $RULE_PATH/snort3-protocol-nntp.rules
         include $RULE_PATH/snort3-protocol-other.rules
         include $RULE_PATH/snort3-protocol-pop.rules
         include $RULE_PATH/snort3-protocol-rpc.rules
-        include $RULE_PATH/snort3-protocol-scada.rules
         include $RULE_PATH/snort3-protocol-services.rules
-        include $RULE_PATH/snort3-protocol-snmp.rules
-        include $RULE_PATH/snort3-protocol-telnet.rules
-        include $RULE_PATH/snort3-protocol-tftp.rules
         include $RULE_PATH/snort3-protocol-voip.rules
         include $RULE_PATH/snort3-pua-adware.rules
         include $RULE_PATH/snort3-pua-other.rules
         include $RULE_PATH/snort3-pua-p2p.rules
         include $RULE_PATH/snort3-pua-toolbars.rules
         include $RULE_PATH/snort3-server-apache.rules
-        include $RULE_PATH/snort3-server-iis.rules
         include $RULE_PATH/snort3-server-mail.rules
-        include $RULE_PATH/snort3-server-mssql.rules
         include $RULE_PATH/snort3-server-mysql.rules
-        include $RULE_PATH/snort3-server-oracle.rules
         include $RULE_PATH/snort3-server-other.rules
         include $RULE_PATH/snort3-server-samba.rules
         include $RULE_PATH/snort3-server-webapp.rules
         include $RULE_PATH/snort3-sql.rules
-        include $RULE_PATH/snort3-x11.rules
 
     ]]
 
+        --include $RULE_PATH/snort3-file-flash.rules
+        --include $RULE_PATH/snort3-netbios.rules
+        --include $RULE_PATH/snort3-os-solaris.rules
+        --include $RULE_PATH/snort3-protocol-dns.rules
+        --include $RULE_PATH/snort3-protocol-finger.rules
+        --include $RULE_PATH/snort3-protocol-ftp.rules
+        --include $RULE_PATH/snort3-protocol-icmp.rules
+        --include $RULE_PATH/snort3-protocol-nntp.rules
+        --include $RULE_PATH/snort3-protocol-scada.rules
+        --include $RULE_PATH/snort3-protocol-snmp.rules
+        --include $RULE_PATH/snort3-protocol-telnet.rules
+	--include $RULE_PATH/snort3-server-iis.rules
+        --include $RULE_PATH/snort3-server-mssql.rules
+        --include $RULE_PATH/snort3-protocol-tftp.rules
+        --include $RULE_PATH/snort3-server-oracle.rules
+        --include $RULE_PATH/snort3-x11.rules
 }
 
 -- use these to configure additional rule actions
