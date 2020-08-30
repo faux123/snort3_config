@@ -194,7 +194,7 @@ classifications = default_classifications
 ips =
 {
     -- use this to enable decoder and inspector alerts
-    --enable_builtin_rules = true,
+    enable_builtin_rules = true,
 
     -- use include for rules files; be sure to set your path
     -- note that rules files can include other rules files
