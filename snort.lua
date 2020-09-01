@@ -194,11 +194,11 @@ classifications = default_classifications
 ips =
 {
     -- use this to enable decoder and inspector alerts
-    enable_builtin_rules = true,
+    --enable_builtin_rules = true,
 
     -- use include for rules files; be sure to set your path
     -- note that rules files can include other rules files
-    --include = 'snort3_community.rules'
+    --include = 'snort3_community.rules',
 
     -- The following include syntax is only valid for BUILD_243 (13-FEB-2018) and later
     -- RULE_PATH is typically set in snort_defaults.lua
@@ -214,6 +214,7 @@ ips =
         include $RULE_PATH/snort3-content-replace.rules
         include $RULE_PATH/snort3-exploit-kit.rules
         include $RULE_PATH/snort3-file-executable.rules
+        include $RULE_PATH/snort3-file-flash.rules
         include $RULE_PATH/snort3-file-identify.rules
         include $RULE_PATH/snort3-file-image.rules
         include $RULE_PATH/snort3-file-java.rules
@@ -257,7 +258,6 @@ ips =
 
     ]]
 
-        --include $RULE_PATH/snort3-file-flash.rules
         --include $RULE_PATH/snort3-netbios.rules
         --include $RULE_PATH/snort3-os-solaris.rules
         --include $RULE_PATH/snort3-protocol-dns.rules
@@ -273,6 +273,7 @@ ips =
         --include $RULE_PATH/snort3-protocol-tftp.rules
         --include $RULE_PATH/snort3-server-oracle.rules
         --include $RULE_PATH/snort3-x11.rules
+	--include /opt/etc/snort/rules/local.rules
 }
 
 -- use these to configure additional rule actions

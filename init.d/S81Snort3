@@ -5,7 +5,7 @@ export PATH=/sbin:/bin:/usr/sbin:/usr/bin:$PATH
 export TZ=$(cat /etc/TZ)
 ENABLED=yes
 PROCS=snort
-ARGS="-z 1 --daq afpacket --daq-dir /opt/lib/daq --daq-var buffer_size_mb=32 -Q -i eth0:br0 -c /opt/etc/snort/snort.lua -l /opt/var/log/snort"
+ARGS="-z 1 --daq afpacket --daq-dir /opt/lib/daq --daq-var buffer_size_mb=32 -Q -i eth0:br0 -c /opt/etc/snort/snort.lua -l /opt/var/log/snort -R /opt/lib/snort3/snor3_community.rules"
 PREARGS=""
 DESC=$PROCS
 PRECMD="killall snort"
