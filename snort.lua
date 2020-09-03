@@ -202,8 +202,6 @@ ips =
     -- The following include syntax is only valid for BUILD_243 (13-FEB-2018) and later
     -- RULE_PATH is typically set in snort_defaults.lua
     rules = [[
-        include /opt/lib/snort3/snort3-community.rules
-
         include $RULE_PATH/snort3-app-detect.rules
         include $RULE_PATH/snort3-browser-chrome.rules
         include $RULE_PATH/snort3-browser-firefox.rules
@@ -211,17 +209,12 @@ ips =
         include $RULE_PATH/snort3-browser-other.rules
         include $RULE_PATH/snort3-browser-plugins.rules
         include $RULE_PATH/snort3-browser-webkit.rules
-        include $RULE_PATH/snort3-content-replace.rules
         include $RULE_PATH/snort3-exploit-kit.rules
         include $RULE_PATH/snort3-file-executable.rules
         include $RULE_PATH/snort3-file-java.rules
         include $RULE_PATH/snort3-file-office.rules
         include $RULE_PATH/snort3-file-other.rules
         include $RULE_PATH/snort3-file-pdf.rules
-        include $RULE_PATH/snort3-indicator-compromise.rules
-        include $RULE_PATH/snort3-indicator-obfuscation.rules
-        include $RULE_PATH/snort3-indicator-scan.rules
-        include $RULE_PATH/snort3-indicator-shellcode.rules
         include $RULE_PATH/snort3-malware-backdoor.rules
         include $RULE_PATH/snort3-malware-other.rules
         include $RULE_PATH/snort3-malware-tools.rules
@@ -229,15 +222,6 @@ ips =
         include $RULE_PATH/snort3-os-mobile.rules
         include $RULE_PATH/snort3-os-other.rules
         include $RULE_PATH/snort3-os-windows.rules
-        include $RULE_PATH/snort3-protocol-imap.rules
-        include $RULE_PATH/snort3-protocol-other.rules
-        include $RULE_PATH/snort3-protocol-rpc.rules
-        include $RULE_PATH/snort3-protocol-services.rules
-        include $RULE_PATH/snort3-protocol-voip.rules
-        include $RULE_PATH/snort3-pua-adware.rules
-        include $RULE_PATH/snort3-pua-other.rules
-        include $RULE_PATH/snort3-pua-p2p.rules
-        include $RULE_PATH/snort3-pua-toolbars.rules
         include $RULE_PATH/snort3-server-apache.rules
         include $RULE_PATH/snort3-server-mysql.rules
         include $RULE_PATH/snort3-server-other.rules
@@ -246,11 +230,18 @@ ips =
         include $RULE_PATH/snort3-sql.rules
     ]]
 
+        --include /opt/lib/snort3/snort3-community.rules
+
         --include /opt/etc/snort/rules/local.rules
+        --include $RULE_PATH/snort3-content-replace.rules
         --include $RULE_PATH/snort3-file-flash.rules
         --include $RULE_PATH/snort3-file-identify.rules
         --include $RULE_PATH/snort3-file-image.rules
         --include $RULE_PATH/snort3-file-multimedia.rules
+        --include $RULE_PATH/snort3-indicator-compromise.rules
+        --include $RULE_PATH/snort3-indicator-obfuscation.rules
+        --include $RULE_PATH/snort3-indicator-scan.rules
+        --include $RULE_PATH/snort3-indicator-shellcode.rules
         --include $RULE_PATH/snort3-malware-cnc.rules
         --include $RULE_PATH/snort3-netbios.rules
         --include $RULE_PATH/snort3-os-solaris.rules
@@ -262,15 +253,24 @@ ips =
         --include $RULE_PATH/snort3-protocol-finger.rules
         --include $RULE_PATH/snort3-protocol-ftp.rules
         --include $RULE_PATH/snort3-protocol-icmp.rules
+        --include $RULE_PATH/snort3-protocol-imap.rules
         --include $RULE_PATH/snort3-protocol-nntp.rules
         --include $RULE_PATH/snort3-protocol-pop.rules
+        --include $RULE_PATH/snort3-protocol-other.rules
+        --include $RULE_PATH/snort3-protocol-rpc.rules
         --include $RULE_PATH/snort3-protocol-scada.rules
+        --include $RULE_PATH/snort3-protocol-services.rules
         --include $RULE_PATH/snort3-protocol-snmp.rules
         --include $RULE_PATH/snort3-protocol-telnet.rules
-	--include $RULE_PATH/snort3-server-iis.rules
-        --include $RULE_PATH/snort3-server-mssql.rules
         --include $RULE_PATH/snort3-protocol-tftp.rules
+        --include $RULE_PATH/snort3-protocol-voip.rules
+        --include $RULE_PATH/snort3-pua-adware.rules
+        --include $RULE_PATH/snort3-pua-other.rules
+        --include $RULE_PATH/snort3-pua-p2p.rules
+        --include $RULE_PATH/snort3-pua-toolbars.rules
+        --include $RULE_PATH/snort3-server-iis.rules
         --include $RULE_PATH/snort3-server-mail.rules
+        --include $RULE_PATH/snort3-server-mssql.rules
         --include $RULE_PATH/snort3-server-oracle.rules
         --include $RULE_PATH/snort3-x11.rules
 }
